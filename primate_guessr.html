@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimateGuessr - Where in the World?</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .game-container {
+            max-width: 1400px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-label {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+
+        .score-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .game-content {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .primate-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #ffffff;
+        }
+
+        .primate-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .primate-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .primate-name {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .primate-scientific {
+            font-size: 1em;
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .instruction {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 10px;
+            color: #2c3e50;
+            font-size: 1.1em;
+            margin-top: 20px;
+        }
+
+        .map-section {
+            flex: 2;
+            min-width: 500px;
+            position: relative;
+        }
+
+        #map {
+            width: 100%;
+            height: 600px;
+        }
+
+        .controls {
+            padding: 20px;
+            text-align: center;
+            background: #f8f9fa;
+            border-top: 2px solid #dee2e6;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .modal.correct h2 {
+            color: #28a745;
+        }
+
+        .modal.incorrect h2 {
+            color: #dc3545;
+        }
+
+        .distance-info {
+            font-size: 1.3em;
+            margin: 20px 0;
+            color: #495057;
+        }
+
+        .points-earned {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+        }
+
+        .game-over {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .game-over h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .final-stats {
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+
+        .pulse {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .game-content {
+                flex-direction: column;
+            }
+            
+            .map-section {
+                min-width: 100%;
+            }
+
+            #map {
+                height: 400px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1>🐵 PrimateGuessr 🌍</h1>
+            <p>Can you guess where these amazing primates come from?</p>
+        </div>
+
+        <div class="score-board">
+            <div class="score-item">
+                <div class="score-label">Round</div>
+                <div class="score-value" id="currentRound">1</div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">Score</div>
+                <div class="score-value" id="totalScore">0</div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">Best Streak</div>
+                <div class="score-value" id="bestStreak">0</div>
+            </div>
+        </div>
+
+        <div class="game-content">
+            <div class="primate-section">
+                <div class="primate-card">
+                    <img id="primateImage" class="primate-image" src="" alt="Primate">
+                    <div class="primate-name" id="primateName">Loading...</div>
+                    <div class="primate-scientific" id="primateScientific"></div>
+                    <div class="instruction">
+                        👆 Click on the map to guess where this primate is found in the wild!
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-section">
+                <div id="map"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-primary" id="submitBtn" disabled>Submit Guess</button>
+            <button class="btn btn-secondary" id="nextBtn" style="display: none;">Next Primate</button>
+            <button class="btn btn-secondary" id="restartBtn" style="display: none;">Play Again</button>
+        </div>
+    </div>
+
+    <div class="modal" id="resultModal">
+        <div class="modal-content">
+            <h2 id="resultTitle">Great Job!</h2>
+            <div class="distance-info" id="distanceInfo"></div>
+            <div class="points-earned" id="pointsEarned"></div>
+            <p id="resultMessage"></p>
+            <button class="btn btn-primary" id="continueBtn">Continue</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Primate database with accurate locations
+        const primates = [
+            {
+                name: "Mountain Gorilla",
+                scientific: "Gorilla beringei beringei",
+                image: "https://images.unsplash.com/photo-1551316679-9c6ae9dec224?w=800",
+                location: { lat: -1.4, lng: 29.7 }, // Rwanda/Uganda
+                region: "Central Africa"
+            },
+            {
+                name: "Bornean Orangutan",
+                scientific: "Pongo pygmaeus",
+                image: "https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?w=800",
+                location: { lat: 0.5, lng: 114.5 }, // Borneo
+                region: "Borneo, Indonesia"
+            },
+            {
+                name: "Ring-tailed Lemur",
+                scientific: "Lemur catta",
+                image: "https://images.unsplash.com/photo-1610104786772-e7d5fed3c952?w=800",
+                location: { lat: -23.5, lng: 46.5 }, // Madagascar
+                region: "Madagascar"
+            },
+            {
+                name: "Japanese Macaque",
+                scientific: "Macaca fuscata",
+                image: "https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=800",
+                location: { lat: 36.5, lng: 138.0 }, // Japan
+                region: "Japan"
+            },
+            {
+                name: "Mandrill",
+                scientific: "Mandrillus sphinx",
+                image: "https://images.unsplash.com/photo-1614027164847-1b28cfe1df60?w=800",
+                location: { lat: 0.5, lng: 11.5 }, // Gabon
+                region: "Central Africa"
+            },
+            {
+                name: "Howler Monkey",
+                scientific: "Alouatta seniculus",
+                image: "https://images.unsplash.com/photo-1540206395-68808572332f?w=800",
+                location: { lat: -3.5, lng: -62.0 }, // Amazon
+                region: "Amazon Rainforest"
+            },
+            {
+                name: "Golden Lion Tamarin",
+                scientific: "Leontopithecus rosalia",
+                image: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800",
+                location: { lat: -22.5, lng: -42.5 }, // Brazil
+                region: "Atlantic Forest, Brazil"
+            },
+            {
+                name: "Proboscis Monkey",
+                scientific: "Nasalis larvatus",
+                image: "https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?w=800",
+                location: { lat: 4.5, lng: 115.0 }, // Borneo
+                region: "Borneo"
+            },
+            {
+                name: "Chimpanzee",
+                scientific: "Pan troglodytes",
+                image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=800",
+                location: { lat: 5.5, lng: 15.0 }, // Central Africa
+                region: "Central Africa"
+            },
+            {
+                name: "Spider Monkey",
+                scientific: "Ateles geoffroyi",
+                image: "https://images.unsplash.com/photo-1502937406922-305bb2789e95?w=800",
+                location: { lat: 9.0, lng: -84.0 }, // Costa Rica
+                region: "Central America"
+            }
+        ];
+
+        // Game state
+        let currentRound = 0;
+        let totalScore = 0;
+        let bestStreak = 0;
+        let currentStreak = 0;
+        let userGuess = null;
+        let map, userMarker, correctMarker, lineConnector;
+        const maxRounds = 5;
+
+        // Initialize map
+        function initMap() {
+            map = L.map('map', {
+                center: [20, 0],
+                zoom: 2,
+                minZoom: 2,
+                maxZoom: 8,
+                worldCopyJump: true
+            });
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors',
+                noWrap: false
+            }).addTo(map);
+
+            // Click handler
+            map.on('click', function(e) {
+                if (!userMarker) {
+                    userGuess = e.latlng;
+                    
+                    // Add marker for user's guess
+                    userMarker = L.marker([e.latlng.lat, e.latlng.lng], {
+                        icon: L.icon({
+                            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+                            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                            iconSize: [25, 41],
+                            iconAnchor: [12, 41],
+                            popupAnchor: [1, -34],
+                            shadowSize: [41, 41]
+                        })
+                    }).addTo(map);
+                    
+                    userMarker.bindPopup("Your Guess").openPopup();
+                    document.getElementById('submitBtn').disabled = false;
+                }
+            });
+        }
+
+        // Calculate distance between two points (Haversine formula)
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Earth's radius in km
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+
+        // Calculate score based on distance
+        function calculateScore(distance) {
+            const maxDistance = 20000; // 20,000 km
+            if (distance > maxDistance) return 0;
+            
+            // Exponential scoring: closer guesses get exponentially more points
+            const normalized = 1 - (distance / maxDistance);
+            return Math.round(Math.pow(normalized, 2) * 1000);
+        }
+
+        // Load new primate
+        function loadPrimate() {
+            if (currentRound >= maxRounds) {
+                endGame();
+                return;
+            }
+
+            const primate = primates[currentRound];
+            document.getElementById('primateImage').src = primate.image;
+            document.getElementById('primateName').textContent = primate.name;
+            document.getElementById('primateScientific').textContent = primate.scientific;
+            document.getElementById('currentRound').textContent = currentRound + 1;
+
+            // Reset map
+            if (userMarker) map.removeLayer(userMarker);
+            if (correctMarker) map.removeLayer(correctMarker);
+            if (lineConnector) map.removeLayer(lineConnector);
+            userMarker = null;
+            correctMarker = null;
+            lineConnector = null;
+            userGuess = null;
+
+            map.setView([20, 0], 2);
+            document.getElementById('submitBtn').disabled = true;
+            document.getElementById('submitBtn').style.display = 'inline-block';
+            document.getElementById('nextBtn').style.display = 'none';
+        }
+
+        // Submit guess
+        function submitGuess() {
+            const primate = primates[currentRound];
+            const distance = calculateDistance(
+                userGuess.lat, 
+                userGuess.lng, 
+                primate.location.lat, 
+                primate.location.lng
+            );
+
+            const score = calculateScore(distance);
+            totalScore += score;
+
+            // Update streak
+            if (distance < 500) {
+                currentStreak++;
+                if (currentStreak > bestStreak) {
+                    bestStreak = currentStreak;
+                    document.getElementById('bestStreak').textContent = bestStreak;
+                }
+            } else {
+                currentStreak = 0;
+            }
+
+            // Show correct location
+            correctMarker = L.marker([primate.location.lat, primate.location.lng], {
+                icon: L.icon({
+                    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    shadowSize: [41, 41]
+                })
+            }).addTo(map);
+            
+            correctMarker.bindPopup(`Correct Location: ${primate.region}`).openPopup();
+
+            // Draw line between guess and correct location
+            lineConnector = L.polyline([
+                [userGuess.lat, userGuess.lng],
+                [primate.location.lat, primate.location.lng]
+            ], {
+                color: distance < 500 ? 'green' : distance < 2000 ? 'orange' : 'red',
+                weight: 3,
+                opacity: 0.7,
+                dashArray: '10, 10'
+            }).addTo(map);
+
+            // Fit map to show both markers
+            const bounds = L.latLngBounds([
+                [userGuess.lat, userGuess.lng],
+                [primate.location.lat, primate.location.lng]
+            ]);
+            map.fitBounds(bounds, { padding: [50, 50] });
+
+            // Show result modal
+            showResult(distance, score, primate.region);
+
+            document.getElementById('totalScore').textContent = totalScore;
+            document.getElementById('submitBtn').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'inline-block';
+        }
+
+        // Show result modal
+        function showResult(distance, score, region) {
+            const modal = document.getElementById('resultModal');
+            const resultTitle = document.getElementById('resultTitle');
+            const distanceInfo = document.getElementById('distanceInfo');
+            const pointsEarned = document.getElementById('pointsEarned');
+            const resultMessage = document.getElementById('resultMessage');
+
+            const distanceKm = Math.round(distance);
+            
+            if (distance < 100) {
+                modal.className = 'modal correct';
+                resultTitle.textContent = '🎯 Perfect!';
+                resultMessage.textContent = 'You nailed it! Amazing geographical knowledge!';
+            } else if (distance < 500) {
+                modal.className = 'modal correct';
+                resultTitle.textContent = '🌟 Excellent!';
+                resultMessage.textContent = 'Very close! You know your primates!';
+            } else if (distance < 2000) {
+                modal.className = 'modal correct';
+                resultTitle.textContent = '👍 Good Job!';
+                resultMessage.textContent = 'Not bad! You got the right region!';
+            } else {
+                modal.className = 'modal incorrect';
+                resultTitle.textContent = '🤔 Not Quite';
+                resultMessage.textContent = `This primate is found in ${region}`;
+            }
+
+            distanceInfo.textContent = `Distance: ${distanceKm.toLocaleString()} km away`;
+            pointsEarned.textContent = `+${score} points`;
+
+            modal.style.display = 'flex';
+        }
+
+        // Next round
+        function nextRound() {
+            document.getElementById('resultModal').style.display = 'none';
+            currentRound++;
+            loadPrimate();
+        }
+
+        // End game
+        function endGame() {
+            const controls = document.querySelector('.controls');
+            const avgScore = Math.round(totalScore / maxRounds);
+            
+            controls.innerHTML = `
+                <div class="game-over">
+                    <h2>🎉 Game Complete! 🎉</h2>
+                    <div class="final-stats">
+                        <p><strong>Total Score:</strong> ${totalScore} points</p>
+                        <p><strong>Average per Round:</strong> ${avgScore} points</p>
+                        <p><strong>Best Streak:</strong> ${bestStreak} perfect guesses</p>
+                    </div>
+                    <button class="btn btn-primary pulse" onclick="restartGame()">Play Again</button>
+                </div>
+            `;
+        }
+
+        // Restart game
+        function restartGame() {
+            currentRound = 0;
+            totalScore = 0;
+            currentStreak = 0;
+            document.getElementById('totalScore').textContent = '0';
+            document.getElementById('currentRound').textContent = '1';
+            
+            const controls = document.querySelector('.controls');
+            controls.innerHTML = `
+                <button class="btn btn-primary" id="submitBtn" disabled>Submit Guess</button>
+                <button class="btn btn-secondary" id="nextBtn" style="display: none;">Next Primate</button>
+            `;
+            
+            document.getElementById('submitBtn').addEventListener('click', submitGuess);
+            document.getElementById('nextBtn').addEventListener('click', nextRound);
+            
+            loadPrimate();
+        }
+
+        // Initialize game
+        document.addEventListener('DOMContentLoaded', function() {
+            initMap();
+            loadPrimate();
+
+            document.getElementById('submitBtn').addEventListener('click', submitGuess);
+            document.getElementById('nextBtn').addEventListener('click', nextRound);
+            document.getElementById('continueBtn').addEventListener('click', function() {
+                document.getElementById('resultModal').style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
