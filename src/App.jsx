@@ -17,74 +17,185 @@ const primates = [
     {
         name: "Mountain Gorilla",
         scientific: "Gorilla beringei beringei",
-        image: "https://images.unsplash.com/photo-1551316679-9c6ae9dec224?w=800",
+        image: "../img/Gorilla.jpg",
         location: { lat: -1.4, lng: 29.7 },
         region: "Central Africa"
     },
     {
         name: "Bornean Orangutan",
         scientific: "Pongo pygmaeus",
-        image: "https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?w=800",
+        image: "../img/Orangutan.jpg",
         location: { lat: 0.5, lng: 114.5 },
         region: "Borneo, Indonesia"
     },
     {
-        name: "Ring-tailed Lemur",
+        name: "Ring-Tailed Lemur",
         scientific: "Lemur catta",
-        image: "https://images.unsplash.com/photo-1610104786772-e7d5fed3c952?w=800",
+        image: "../img/Ring_tailed_lemur.jpg",
         location: { lat: -23.5, lng: 46.5 },
         region: "Madagascar"
     },
     {
         name: "Japanese Macaque",
         scientific: "Macaca fuscata",
-        image: "https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=800",
+        image: "../img/Japanese_Macaque.jpg",
         location: { lat: 36.5, lng: 138.0 },
         region: "Japan"
     },
     {
         name: "Mandrill",
         scientific: "Mandrillus sphinx",
-        image: "https://images.unsplash.com/photo-1614027164847-1b28cfe1df60?w=800",
+        image: "../img/Mandrill.jpg",
         location: { lat: 0.5, lng: 11.5 },
         region: "Central Africa"
     },
     {
         name: "Howler Monkey",
         scientific: "Alouatta seniculus",
-        image: "https://images.unsplash.com/photo-1540206395-68808572332f?w=800",
+        image: "../img/Howler_monkey.jpg",
         location: { lat: -3.5, lng: -62.0 },
         region: "Amazon Rainforest"
     },
     {
         name: "Golden Lion Tamarin",
         scientific: "Leontopithecus rosalia",
-        image: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800",
+        image: "../img/Golden_lion_tamarin.jpg",
         location: { lat: -22.5, lng: -42.5 },
         region: "Atlantic Forest, Brazil"
     },
     {
         name: "Proboscis Monkey",
         scientific: "Nasalis larvatus",
-        image: "https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?w=800",
+        image: "../img/Proboscis_monkey.jpg",
         location: { lat: 4.5, lng: 115.0 },
         region: "Borneo"
     },
     {
         name: "Chimpanzee",
         scientific: "Pan troglodytes",
-        image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=800",
+        image: "../img/Chimpanzee.jpg",
         location: { lat: 5.5, lng: 15.0 },
         region: "Central Africa"
     },
     {
         name: "Spider Monkey",
         scientific: "Ateles geoffroyi",
-        image: "https://images.unsplash.com/photo-1502937406922-305bb2789e95?w=800",
+        image: "../img/Spider_monkey.jpg",
         location: { lat: 9.0, lng: -84.0 },
         region: "Central America"
+    },
+    {
+        name: "Siamang",
+        scientific: "Symphalangus syndactylus",
+        image: "../img/Siamang.jpg",
+        location: { lat: 2.0, lng: 102.0 },
+        region: "Southeast Asia"
+    },
+    {
+        name: "Gibbon",
+        scientific: "Hylobates lar",
+        image: "../img/Gibbon.jpg",
+        location: { lat: 6.0, lng: 100.0 },
+        region: "Southeast Asia"
+    },
+    {
+        name: "Baboon",
+        scientific: "Papio anubis",
+        image: "../img/Baboon.jpg",
+        location: { lat: 1.0, lng: 36.0 },
+        region: "East Africa"
+    },
+    {
+        name: "Capuchin Monkey",
+        scientific: "Cebus capucinus",
+        image: "../img/Capuchin_monkey.jpg",
+        location: { lat: 10.0, lng: -84.0 },
+        region: "Central America"
+    },
+    {
+        name: "Vervet Monkey",
+        scientific: "Chlorocebus pygerythrus",
+        image: "../img/Vervet_monkey.jpg",
+        location: { lat: -1.0, lng: 36.0 },
+        region: "East Africa"
+    },
+    {
+        name: "Marmoset",
+        scientific: "Callithrix jacchus",
+        image: "../img/Marmoset.jpg",
+        location: { lat: -5.0, lng: -38.0 },
+        region: "Brazil"
+    },
+    {
+        name: "Squirrel Monkey",
+        scientific: "Saimiri sciureus",
+        image: "../img/Squirrel_monkey.jpg",
+        location: { lat: -3.0, lng: -60.0 },
+        region: "Amazon Rainforest"
+    },
+    {
+        name: "Colobus Monkey",
+        scientific: "Colobus guereza",
+        image: "../img/Colobus_monkey.jpg",
+        location: { lat: 1.0, lng: 35.0 },
+        region: "East Africa"
+    },
+    {
+        name: "Tarsier",
+        scientific: "Tarsius syrichta",
+        image: "../img/Tarsier.jpg",
+        location: { lat: 10.0, lng: 125.0 },
+        region: "Philippines"
+    },
+    {
+        name: "Indri",
+        scientific: "Indri indri",
+        image: "../img/Indri.jpg",
+        location: { lat: -18.0, lng: 47.0 },
+        region: "Madagascar"
+    },
+    {
+        name: "Aye-aye",
+        scientific: "Daubentonia madagascariensis",
+        image: "../img/Aye-aye.jpg",
+        location: { lat: -18.0, lng: 46.0 },
+        region: "Madagascar"
+    },
+    {
+        name: "Sifaka",
+        scientific: "Propithecus verreauxi",
+        image: "../img/Sifaka.jpg",
+        location: { lat: -22.0, lng: 45.0 },
+        region: "Madagascar"
+    },
+    {
+        name: "Bonobo",
+        scientific: "Pan paniscus",
+        image: "../img/Bonobo.jpg",
+        location: { lat: -2.0, lng: 20.0 },
+        region: "Congo Basin"
+    },
+    {
+        name: "Red Colobus",
+        scientific: "Piliocolobus badius",
+        image: "../img/Red_colobus.jpg",
+        location: { lat: 7.0, lng: -8.0 },
+        region: "West Africa"
+    },
+    {
+        name: "Slow Loris",
+        scientific: "Nycticebus coucang",
+        image: "../img/Slow_loris.jpg",
+        location: { lat: 3.0, lng: 101.0 },
+        region: "Southeast Asia"
     }
 ];
+
+// Function to randomly select unique primates
+function selectRandomPrimates(primateArray, count) {
+    const shuffled = [...primateArray].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+}
 
 const MAX_ROUNDS = 5;
 
@@ -132,8 +243,9 @@ function App() {
     const [mapBounds, setMapBounds] = useState(null);
     const [canGuess, setCanGuess] = useState(true);
     const [resetMapView, setResetMapView] = useState(false);
+    const [selectedPrimates, setSelectedPrimates] = useState(() => selectRandomPrimates(primates, MAX_ROUNDS));
 
-    const currentPrimate = primates[currentRound];
+    const currentPrimate = selectedPrimates[currentRound];
 
     // Early return if primate data isn't available
     if (!currentPrimate && !gameOver) {
@@ -242,6 +354,8 @@ function App() {
         setGameOver(false);
         setCanGuess(true);
         setMapBounds(null);
+        // Select new random primates for the new game
+        setSelectedPrimates(selectRandomPrimates(primates, MAX_ROUNDS));
     };
 
     if (gameOver) {
