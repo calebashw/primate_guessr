@@ -12,182 +12,482 @@ L.Icon.Default.mergeOptions({
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
-// Primate database with accurate locations
+// Primate database with accurate locations and taxonomic information
 const primates = [
     {
         name: "Mountain Gorilla",
-        scientific: "Gorilla beringei beringei",
+        family: "Hominidae (Great Apes)",
         image: "../img/Gorilla.jpg",
         location: { lat: -1.4, lng: 29.7 },
-        region: "Central Africa"
+        region: "Central Africa",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Haplorhini",
+            infraorder: "Simiiformes",
+            superfamily: "Hominoidea",
+            family: "Hominidae"
+        },
+        characteristics: [
+            "Post-orbital closure (complete bony eye socket)",
+            "No tapetum lucidum (no eye shine)",
+            "Y-5 molar cusp pattern"
+        ]
     },
     {
         name: "Bornean Orangutan",
-        scientific: "Pongo pygmaeus",
+        family: "Hominidae (Great Apes)",
         image: "../img/Orangutan.jpg",
         location: { lat: 0.5, lng: 114.5 },
-        region: "Borneo, Indonesia"
+        region: "Borneo, Indonesia",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Haplorhini",
+            infraorder: "Simiiformes",
+            superfamily: "Hominoidea",
+            family: "Hominidae"
+        },
+        characteristics: [
+            "Post-orbital closure (complete bony eye socket)",
+            "Highly opposable thumbs",
+            "No tail (characteristic of apes)"
+        ]
     },
     {
         name: "Ring-Tailed Lemur",
-        scientific: "Lemur catta",
+        family: "Lemuridae (True Lemurs)",
         image: "../img/Ring_tailed_lemur.jpg",
         location: { lat: -23.5, lng: 46.5 },
-        region: "Madagascar"
+        region: "Madagascar",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Strepsirrhini",
+            infraorder: "Lemuriformes",
+            superfamily: "Lemuroidea",
+            family: "Lemuridae"
+        },
+        characteristics: [
+            "Tapetum lucidum (reflective eye layer for night vision)",
+            "Dental comb (tooth comb for grooming)",
+            "Rhinarium (wet nose)"
+        ]
     },
     {
         name: "Japanese Macaque",
-        scientific: "Macaca fuscata",
+        family: "Cercopithecidae (Old World Monkeys)",
         image: "../img/Japanese_Macaque.jpg",
         location: { lat: 36.5, lng: 138.0 },
-        region: "Japan"
+        region: "Japan",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Haplorhini",
+            infraorder: "Simiiformes",
+            superfamily: "Cercopithecoidea",
+            family: "Cercopithecidae"
+        },
+        characteristics: [
+            "Bilophodont molars (two ridges on molars)",
+            "Ischial callosities (sitting pads)",
+            "Post-orbital closure (complete bony eye socket)"
+        ]
     },
     {
         name: "Mandrill",
-        scientific: "Mandrillus sphinx",
+        family: "Cercopithecidae (Old World Monkeys)",
         image: "../img/Mandrill.jpg",
         location: { lat: 0.5, lng: 11.5 },
-        region: "Central Africa"
+        region: "Central Africa",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Haplorhini",
+            infraorder: "Simiiformes",
+            superfamily: "Cercopithecoidea",
+            family: "Cercopithecidae"
+        },
+        characteristics: [
+            "Bilophodont molars (two ridges on molars)",
+            "Ischial callosities (sitting pads)",
+            "Sexual dichromatism (colorful facial markings)"
+        ]
     },
     {
         name: "Howler Monkey",
-        scientific: "Alouatta seniculus",
+        family: "Atelidae (Spider & Howler Monkeys)",
         image: "../img/Howler_monkey.jpg",
         location: { lat: -3.5, lng: -62.0 },
-        region: "Amazon Rainforest"
+        region: "Amazon Rainforest",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Haplorhini",
+            infraorder: "Simiiformes",
+            superfamily: "Ceboidea",
+            family: "Atelidae"
+        },
+        characteristics: [
+            "Prehensile tail (grasping tail with tactile pad)",
+            "Enlarged hyoid bone (for loud vocalizations)",
+            "Post-orbital closure (complete bony eye socket)"
+        ]
     },
     {
         name: "Golden Lion Tamarin",
-        scientific: "Leontopithecus rosalia",
+        family: "Callitrichidae (Marmosets & Tamarins)",
         image: "../img/Golden_lion_tamarin.jpg",
         location: { lat: -22.5, lng: -42.5 },
-        region: "Atlantic Forest, Brazil"
+        region: "Atlantic Forest, Brazil",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Haplorhini",
+            infraorder: "Simiiformes",
+            superfamily: "Ceboidea",
+            family: "Callitrichidae"
+        },
+        characteristics: [
+            "Tegulae (claw-like nails) except hallux",
+            "Typically twin births",
+            "Small body size with non-prehensile tail"
+        ]
     },
     {
         name: "Proboscis Monkey",
-        scientific: "Nasalis larvatus",
+        family: "Cercopithecidae (Old World Monkeys)",
         image: "../img/Proboscis_monkey.jpg",
         location: { lat: 4.5, lng: 115.0 },
-        region: "Borneo"
+        region: "Borneo",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Haplorhini",
+            infraorder: "Simiiformes",
+            superfamily: "Cercopithecoidea",
+            family: "Cercopithecidae"
+        },
+        characteristics: [
+            "Bilophodont molars (two ridges on molars)",
+            "Ischial callosities (sitting pads)",
+            "Sacculated stomach (for leaf digestion)"
+        ]
     },
     {
         name: "Chimpanzee",
-        scientific: "Pan troglodytes",
+        family: "Hominidae (Great Apes)",
         image: "../img/Chimpanzee.jpg",
         location: { lat: 5.5, lng: 15.0 },
-        region: "Central Africa"
+        region: "Central Africa",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Haplorhini",
+            infraorder: "Simiiformes",
+            superfamily: "Hominoidea",
+            family: "Hominidae"
+        },
+        characteristics: [
+            "Y-5 molar cusp pattern",
+            "No tail (characteristic of apes)",
+            "Knuckle-walking locomotion"
+        ]
     },
     {
         name: "Spider Monkey",
-        scientific: "Ateles geoffroyi",
+        family: "Atelidae (Spider & Howler Monkeys)",
         image: "../img/Spider_monkey.jpg",
         location: { lat: 9.0, lng: -84.0 },
-        region: "Central America"
+        region: "Central America",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Haplorhini",
+            infraorder: "Simiiformes",
+            superfamily: "Ceboidea",
+            family: "Atelidae"
+        },
+        characteristics: [
+            "Prehensile tail (grasping tail with tactile pad)",
+            "Vestigial or absent thumb",
+            "Suspensory locomotion (brachiation)"
+        ]
     },
     {
         name: "Siamang",
-        scientific: "Symphalangus syndactylus",
+        family: "Hylobatidae (Lesser Apes)",
         image: "../img/Siamang.jpg",
         location: { lat: 2.0, lng: 102.0 },
-        region: "Southeast Asia"
+        region: "Southeast Asia",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Haplorhini",
+            infraorder: "Simiiformes",
+            superfamily: "Hominoidea",
+            family: "Hylobatidae"
+        },
+        characteristics: [
+            "No tail (characteristic of apes)",
+            "Syndactyly (webbed second and third toes)",
+            "Large throat sac for vocalizations"
+        ]
     },
     {
         name: "Gibbon",
-        scientific: "Hylobates lar",
+        family: "Hylobatidae (Lesser Apes)",
         image: "../img/Gibbon.jpg",
         location: { lat: 6.0, lng: 100.0 },
-        region: "Southeast Asia"
+        region: "Southeast Asia",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Haplorhini",
+            infraorder: "Simiiformes",
+            superfamily: "Hominoidea",
+            family: "Hylobatidae"
+        },
+        characteristics: [
+            "Elongated forelimbs for brachiation",
+            "No tail (characteristic of apes)",
+            "Ball-and-socket wrist joint"
+        ]
     },
     {
         name: "Baboon",
-        scientific: "Papio anubis",
+        family: "Cercopithecidae (Old World Monkeys)",
         image: "../img/Baboon.jpg",
         location: { lat: 1.0, lng: 36.0 },
-        region: "East Africa"
+        region: "East Africa",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Haplorhini",
+            infraorder: "Simiiformes",
+            superfamily: "Cercopithecoidea",
+            family: "Cercopithecidae"
+        },
+        characteristics: [
+            "Bilophodont molars (two ridges on molars)",
+            "Ischial callosities (sitting pads)",
+            "Terrestrial quadrupedalism"
+        ]
     },
     {
         name: "Capuchin Monkey",
-        scientific: "Cebus capucinus",
+        family: "Cebidae (Capuchins & Squirrel Monkeys)",
         image: "../img/Capuchin_monkey.jpg",
         location: { lat: 10.0, lng: -84.0 },
-        region: "Central America"
+        region: "Central America",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Haplorhini",
+            infraorder: "Simiiformes",
+            superfamily: "Ceboidea",
+            family: "Cebidae"
+        },
+        characteristics: [
+            "Semi-prehensile tail",
+            "Nails (ungulae) on all digits",
+            "High encephalization quotient (brain-to-body ratio)"
+        ]
     },
     {
         name: "Vervet Monkey",
-        scientific: "Chlorocebus pygerythrus",
+        family: "Cercopithecidae (Old World Monkeys)",
         image: "../img/Vervet_monkey.jpg",
         location: { lat: -1.0, lng: 36.0 },
-        region: "East Africa"
+        region: "East Africa",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Haplorhini",
+            infraorder: "Simiiformes",
+            superfamily: "Cercopithecoidea",
+            family: "Cercopithecidae"
+        },
+        characteristics: [
+            "Bilophodont molars (two ridges on molars)",
+            "Ischial callosities (sitting pads)",
+            "Cheek pouches for food storage"
+        ]
     },
     {
         name: "Marmoset",
-        scientific: "Callithrix jacchus",
+        family: "Callitrichidae (Marmosets & Tamarins)",
         image: "../img/Marmoset.jpg",
         location: { lat: -5.0, lng: -38.0 },
-        region: "Brazil"
+        region: "Brazil",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Haplorhini",
+            infraorder: "Simiiformes",
+            superfamily: "Ceboidea",
+            family: "Callitrichidae"
+        },
+        characteristics: [
+            "Tegulae (claw-like nails) except hallux",
+            "Specialized incisors for tree gouging",
+            "Typically twin births"
+        ]
     },
     {
         name: "Squirrel Monkey",
-        scientific: "Saimiri sciureus",
+        family: "Cebidae (Capuchins & Squirrel Monkeys)",
         image: "../img/Squirrel_monkey.jpg",
         location: { lat: -3.0, lng: -60.0 },
-        region: "Amazon Rainforest"
+        region: "Amazon Rainforest",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Haplorhini",
+            infraorder: "Simiiformes",
+            superfamily: "Ceboidea",
+            family: "Cebidae"
+        },
+        characteristics: [
+            "Non-prehensile tail (used for balance)",
+            "Nails (ungulae) on all digits",
+            "Large brain relative to body size"
+        ]
     },
     {
         name: "Colobus Monkey",
-        scientific: "Colobus guereza",
+        family: "Cercopithecidae (Old World Monkeys)",
         image: "../img/Colobus_monkey.jpg",
         location: { lat: 1.0, lng: 35.0 },
-        region: "East Africa"
+        region: "East Africa",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Haplorhini",
+            infraorder: "Simiiformes",
+            superfamily: "Cercopithecoidea",
+            family: "Cercopithecidae"
+        },
+        characteristics: [
+            "Reduced or absent thumbs",
+            "Sacculated stomach (for leaf digestion)",
+            "Bilophodont molars (two ridges on molars)"
+        ]
     },
     {
         name: "Tarsier",
-        scientific: "Tarsius syrichta",
+        family: "Tarsiidae (Tarsiers)",
         image: "../img/Tarsier.jpg",
         location: { lat: 10.0, lng: 125.0 },
-        region: "Philippines"
+        region: "Philippines",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Haplorhini",
+            infraorder: "Tarsiiformes",
+            superfamily: "Tarsioidea",
+            family: "Tarsiidae"
+        },
+        characteristics: [
+            "Enormous eyes (each eye larger than brain)",
+            "No tapetum lucidum despite nocturnal habits",
+            "Fused tibia and fibula (tibio-fibula)"
+        ]
     },
     {
         name: "Indri",
-        scientific: "Indri indri",
+        family: "Indriidae (Indris & Sifakas)",
         image: "../img/Indri.jpg",
         location: { lat: -18.0, lng: 47.0 },
-        region: "Madagascar"
+        region: "Madagascar",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Strepsirrhini",
+            infraorder: "Lemuriformes",
+            superfamily: "Lemuroidea",
+            family: "Indriidae"
+        },
+        characteristics: [
+            "Tapetum lucidum (reflective eye layer)",
+            "Dental comb (tooth comb for grooming)",
+            "Vertical clinging and leaping locomotion"
+        ]
     },
     {
         name: "Aye-aye",
-        scientific: "Daubentonia madagascariensis",
+        family: "Daubentoniidae (Aye-ayes)",
         image: "../img/Aye-aye.jpg",
         location: { lat: -18.0, lng: 46.0 },
-        region: "Madagascar"
+        region: "Madagascar",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Strepsirrhini",
+            infraorder: "Chiromyiformes",
+            superfamily: "Daubentonioidea",
+            family: "Daubentoniidae"
+        },
+        characteristics: [
+            "Continuously growing incisors (rodent-like)",
+            "Elongated middle finger for percussive foraging",
+            "Tapetum lucidum (reflective eye layer)"
+        ]
     },
     {
         name: "Sifaka",
-        scientific: "Propithecus verreauxi",
+        family: "Indriidae (Indris & Sifakas)",
         image: "../img/Sifaka.jpg",
         location: { lat: -22.0, lng: 45.0 },
-        region: "Madagascar"
+        region: "Madagascar",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Strepsirrhini",
+            infraorder: "Lemuriformes",
+            superfamily: "Lemuroidea",
+            family: "Indriidae"
+        },
+        characteristics: [
+            "Vertical clinging and leaping locomotion",
+            "Dental comb (tooth comb for grooming)",
+            "Tapetum lucidum (reflective eye layer)"
+        ]
     },
     {
         name: "Bonobo",
-        scientific: "Pan paniscus",
+        family: "Hominidae (Great Apes)",
         image: "../img/Bonobo.jpg",
         location: { lat: -2.0, lng: 20.0 },
-        region: "Congo Basin"
+        region: "Congo Basin",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Haplorhini",
+            infraorder: "Simiiformes",
+            superfamily: "Hominoidea",
+            family: "Hominidae"
+        },
+        characteristics: [
+            "Y-5 molar cusp pattern",
+            "No tail (characteristic of apes)",
+            "Post-orbital closure (complete bony eye socket)"
+        ]
     },
     {
         name: "Red Colobus",
-        scientific: "Piliocolobus badius",
+        family: "Cercopithecidae (Old World Monkeys)",
         image: "../img/Red_colobus.jpg",
         location: { lat: 7.0, lng: -8.0 },
-        region: "West Africa"
+        region: "West Africa",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Haplorhini",
+            infraorder: "Simiiformes",
+            superfamily: "Cercopithecoidea",
+            family: "Cercopithecidae"
+        },
+        characteristics: [
+            "Reduced or absent thumbs",
+            "Sacculated stomach (for leaf digestion)",
+            "Bilophodont molars (two ridges on molars)"
+        ]
     },
     {
         name: "Slow Loris",
-        scientific: "Nycticebus coucang",
+        family: "Lorisidae (Lorises & Pottos)",
         image: "../img/Slow_loris.jpg",
         location: { lat: 3.0, lng: 101.0 },
-        region: "Southeast Asia"
+        region: "Southeast Asia",
+        taxonomy: {
+            order: "Primates",
+            suborder: "Strepsirrhini",
+            infraorder: "Lorisiformes",
+            superfamily: "Lorisoidea",
+            family: "Lorisidae"
+        },
+        characteristics: [
+            "Tapetum lucidum (reflective eye layer)",
+            "Dental comb (tooth comb for grooming)",
+            "Venom-producing brachial gland"
+        ]
     }
 ];
 
@@ -474,7 +774,31 @@ function App() {
                             className="primate-image"
                         />
                         <div className="primate-name">{currentPrimate?.name}</div>
-                        <div className="primate-scientific">{currentPrimate?.scientific}</div>
+                        <div className="primate-family">{currentPrimate?.family}</div>
+                        
+                        <div className="taxonomy-section">
+                            <div className="taxonomy-title">Taxonomy</div>
+                            <div className="taxonomy-grid">
+                                <span className="taxonomy-label">Order:</span>
+                                <span className="taxonomy-value">{currentPrimate?.taxonomy?.order}</span>
+                                <span className="taxonomy-label">Suborder:</span>
+                                <span className="taxonomy-value">{currentPrimate?.taxonomy?.suborder}</span>
+                                <span className="taxonomy-label">Infraorder:</span>
+                                <span className="taxonomy-value">{currentPrimate?.taxonomy?.infraorder}</span>
+                                <span className="taxonomy-label">Superfamily:</span>
+                                <span className="taxonomy-value">{currentPrimate?.taxonomy?.superfamily}</span>
+                            </div>
+                        </div>
+
+                        <div className="characteristics-section">
+                            <div className="characteristics-title">Identifying Characteristics</div>
+                            <ul className="characteristics-list">
+                                {currentPrimate?.characteristics?.map((char, index) => (
+                                    <li key={index}>{char}</li>
+                                ))}
+                            </ul>
+                        </div>
+
                         <div className="instruction">
                             👆 Click on the map to guess where this primate is found in the wild!
                         </div>

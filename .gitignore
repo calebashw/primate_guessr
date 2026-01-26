@@ -20,6 +20,7 @@ package-lock.json
 yarn.lock
 pnpm-lock.yaml
 bun.lockb
+dist/
 
 # Python
 __pycache__/
