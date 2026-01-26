@@ -17,7 +17,7 @@ const primates = [
     {
         name: "Mountain Gorilla",
         family: "Hominidae (Great Apes)",
-        image: "../img/Gorilla.jpg",
+        image: "/img/Gorilla.jpg",
         location: { lat: -1.4, lng: 29.7 },
         region: "Central Africa",
         taxonomy: {
@@ -36,7 +36,7 @@ const primates = [
     {
         name: "Bornean Orangutan",
         family: "Hominidae (Great Apes)",
-        image: "../img/Orangutan.jpg",
+        image: "/img/Orangutan.jpg",
         location: { lat: 0.5, lng: 114.5 },
         region: "Borneo, Indonesia",
         taxonomy: {
@@ -55,7 +55,7 @@ const primates = [
     {
         name: "Ring-Tailed Lemur",
         family: "Lemuridae (True Lemurs)",
-        image: "../img/Ring_tailed_lemur.jpg",
+        image: "/img/Ring_tailed_lemur.jpg",
         location: { lat: -23.5, lng: 46.5 },
         region: "Madagascar",
         taxonomy: {
@@ -74,7 +74,7 @@ const primates = [
     {
         name: "Japanese Macaque",
         family: "Cercopithecidae (Old World Monkeys)",
-        image: "../img/Japanese_Macaque.jpg",
+        image: "/img/Japanese_Macaque.jpg",
         location: { lat: 36.5, lng: 138.0 },
         region: "Japan",
         taxonomy: {
@@ -93,7 +93,7 @@ const primates = [
     {
         name: "Mandrill",
         family: "Cercopithecidae (Old World Monkeys)",
-        image: "../img/Mandrill.jpg",
+        image: "/img/Mandrill.jpg",
         location: { lat: 0.5, lng: 11.5 },
         region: "Central Africa",
         taxonomy: {
@@ -112,7 +112,7 @@ const primates = [
     {
         name: "Howler Monkey",
         family: "Atelidae (Spider & Howler Monkeys)",
-        image: "../img/Howler_monkey.jpg",
+        image: "/img/Howler_monkey.jpg",
         location: { lat: -3.5, lng: -62.0 },
         region: "Amazon Rainforest",
         taxonomy: {
@@ -131,7 +131,7 @@ const primates = [
     {
         name: "Golden Lion Tamarin",
         family: "Callitrichidae (Marmosets & Tamarins)",
-        image: "../img/Golden_lion_tamarin.jpg",
+        image: "/img/Golden_lion_tamarin.jpg",
         location: { lat: -22.5, lng: -42.5 },
         region: "Atlantic Forest, Brazil",
         taxonomy: {
@@ -150,7 +150,7 @@ const primates = [
     {
         name: "Proboscis Monkey",
         family: "Cercopithecidae (Old World Monkeys)",
-        image: "../img/Proboscis_monkey.jpg",
+        image: "/img/Proboscis_monkey.jpg",
         location: { lat: 4.5, lng: 115.0 },
         region: "Borneo",
         taxonomy: {
@@ -169,7 +169,7 @@ const primates = [
     {
         name: "Chimpanzee",
         family: "Hominidae (Great Apes)",
-        image: "../img/Chimpanzee.jpg",
+        image: "/img/Chimpanzee.jpg",
         location: { lat: 5.5, lng: 15.0 },
         region: "Central Africa",
         taxonomy: {
@@ -188,7 +188,7 @@ const primates = [
     {
         name: "Spider Monkey",
         family: "Atelidae (Spider & Howler Monkeys)",
-        image: "../img/Spider_monkey.jpg",
+        image: "/img/Spider_monkey.jpg",
         location: { lat: 9.0, lng: -84.0 },
         region: "Central America",
         taxonomy: {
@@ -207,7 +207,7 @@ const primates = [
     {
         name: "Siamang",
         family: "Hylobatidae (Lesser Apes)",
-        image: "../img/Siamang.jpg",
+        image: "/img/Siamang.jpg",
         location: { lat: 2.0, lng: 102.0 },
         region: "Southeast Asia",
         taxonomy: {
@@ -226,7 +226,7 @@ const primates = [
     {
         name: "Gibbon",
         family: "Hylobatidae (Lesser Apes)",
-        image: "../img/Gibbon.jpg",
+        image: "/img/Gibbon.jpg",
         location: { lat: 6.0, lng: 100.0 },
         region: "Southeast Asia",
         taxonomy: {
@@ -245,7 +245,7 @@ const primates = [
     {
         name: "Baboon",
         family: "Cercopithecidae (Old World Monkeys)",
-        image: "../img/Baboon.jpg",
+        image: "/img/Baboon.jpg",
         location: { lat: 1.0, lng: 36.0 },
         region: "East Africa",
         taxonomy: {
@@ -264,7 +264,7 @@ const primates = [
     {
         name: "Capuchin Monkey",
         family: "Cebidae (Capuchins & Squirrel Monkeys)",
-        image: "../img/Capuchin_monkey.jpg",
+        image: "/img/Capuchin_monkey.jpg",
         location: { lat: 10.0, lng: -84.0 },
         region: "Central America",
         taxonomy: {
@@ -283,7 +283,7 @@ const primates = [
     {
         name: "Vervet Monkey",
         family: "Cercopithecidae (Old World Monkeys)",
-        image: "../img/Vervet_monkey.jpg",
+        image: "/img/Vervet_monkey.jpg",
         location: { lat: -1.0, lng: 36.0 },
         region: "East Africa",
         taxonomy: {
@@ -302,7 +302,7 @@ const primates = [
     {
         name: "Marmoset",
         family: "Callitrichidae (Marmosets & Tamarins)",
-        image: "../img/Marmoset.jpg",
+        image: "/img/Marmoset.jpg",
         location: { lat: -5.0, lng: -38.0 },
         region: "Brazil",
         taxonomy: {
@@ -321,7 +321,7 @@ const primates = [
     {
         name: "Squirrel Monkey",
         family: "Cebidae (Capuchins & Squirrel Monkeys)",
-        image: "../img/Squirrel_monkey.jpg",
+        image: "/img/Squirrel_monkey.jpg",
         location: { lat: -3.0, lng: -60.0 },
         region: "Amazon Rainforest",
         taxonomy: {
@@ -340,7 +340,7 @@ const primates = [
     {
         name: "Colobus Monkey",
         family: "Cercopithecidae (Old World Monkeys)",
-        image: "../img/Colobus_monkey.jpg",
+        image: "/img/Colobus_monkey.jpg",
         location: { lat: 1.0, lng: 35.0 },
         region: "East Africa",
         taxonomy: {
@@ -359,7 +359,7 @@ const primates = [
     {
         name: "Tarsier",
         family: "Tarsiidae (Tarsiers)",
-        image: "../img/Tarsier.jpg",
+        image: "/img/Tarsier.jpg",
         location: { lat: 10.0, lng: 125.0 },
         region: "Philippines",
         taxonomy: {
@@ -378,7 +378,7 @@ const primates = [
     {
         name: "Indri",
         family: "Indriidae (Indris & Sifakas)",
-        image: "../img/Indri.jpg",
+        image: "/img/Indri.jpg",
         location: { lat: -18.0, lng: 47.0 },
         region: "Madagascar",
         taxonomy: {
@@ -397,7 +397,7 @@ const primates = [
     {
         name: "Aye-aye",
         family: "Daubentoniidae (Aye-ayes)",
-        image: "../img/Aye-aye.jpg",
+        image: "/img/Aye-aye.jpg",
         location: { lat: -18.0, lng: 46.0 },
         region: "Madagascar",
         taxonomy: {
@@ -416,7 +416,7 @@ const primates = [
     {
         name: "Sifaka",
         family: "Indriidae (Indris & Sifakas)",
-        image: "../img/Sifaka.jpg",
+        image: "/img/Sifaka.jpg",
         location: { lat: -22.0, lng: 45.0 },
         region: "Madagascar",
         taxonomy: {
@@ -435,7 +435,7 @@ const primates = [
     {
         name: "Bonobo",
         family: "Hominidae (Great Apes)",
-        image: "../img/Bonobo.jpg",
+        image: "/img/Bonobo.jpg",
         location: { lat: -2.0, lng: 20.0 },
         region: "Congo Basin",
         taxonomy: {
@@ -454,7 +454,7 @@ const primates = [
     {
         name: "Red Colobus",
         family: "Cercopithecidae (Old World Monkeys)",
-        image: "../img/Red_colobus.jpg",
+        image: "/img/Red_colobus.jpg",
         location: { lat: 7.0, lng: -8.0 },
         region: "West Africa",
         taxonomy: {
@@ -473,7 +473,7 @@ const primates = [
     {
         name: "Slow Loris",
         family: "Lorisidae (Lorises & Pottos)",
-        image: "../img/Slow_loris.jpg",
+        image: "/img/Slow_loris.jpg",
         location: { lat: 3.0, lng: 101.0 },
         region: "Southeast Asia",
         taxonomy: {
