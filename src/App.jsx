@@ -564,14 +564,29 @@ function App() {
         return R * c;
     };
 
-    // Calculate score based on distance
-    // Work on scoring more
+    // Tiered distance bands with linear (softer) decay per band
+    const PERFECT_KM = 75;
+    const EXCELLENT_KM = 500;
+    const GOOD_KM = 2000;
+    const MAX_KM = 5000;
+
     const calculateScore = (distance) => {
-        const maxDistance = 5000; // 5,000 km
-        if (distance > maxDistance) return 0;
-        
-        const normalized = 1 - (distance / maxDistance);
-        return Math.round(Math.pow(normalized, 2) * 1000);
+        if (distance > MAX_KM) return 0;
+        if (distance <= PERFECT_KM) return 1000;
+
+        if (distance < EXCELLENT_KM) {
+            // 75–500 km: linear 1000 → 700
+            const t = (distance - PERFECT_KM) / (EXCELLENT_KM - PERFECT_KM);
+            return Math.round(1000 - t * 300);
+        }
+        if (distance < GOOD_KM) {
+            // 500–2000 km: linear 700 → 250
+            const t = (distance - EXCELLENT_KM) / (GOOD_KM - EXCELLENT_KM);
+            return Math.round(700 - t * 450);
+        }
+        // 2000–5000 km: linear 250 → 25
+        const t = (distance - GOOD_KM) / (MAX_KM - GOOD_KM);
+        return Math.round(250 - t * 225);
     };
 
     const handleMapClick = (latlng) => {
@@ -593,9 +608,9 @@ function App() {
         const score = calculateScore(distance);
         setTotalScore(prev => prev + score);
 
-        // Update streak
+        // Update streak (excellent or better)
         let newStreak = currentStreak;
-        if (distance < 500) {
+        if (distance < EXCELLENT_KM) {
             newStreak = currentStreak + 1;
             if (newStreak > bestStreak) {
                 setBestStreak(newStreak);
@@ -688,16 +703,16 @@ function App() {
 
         const { distance, score, region } = resultData;
         const distanceKm = Math.round(distance);
-        const isCorrect = distance < 2000;
+        const isCorrect = distance < GOOD_KM;
 
         let title, message;
-        if (distance < 100) {
+        if (distance <= PERFECT_KM) {
             title = '🎯 Perfect!';
             message = 'You nailed it! Amazing geographical knowledge!';
-        } else if (distance < 500) {
+        } else if (distance < EXCELLENT_KM) {
             title = '🌟 Excellent!';
             message = 'Very close! You know your primates!';
-        } else if (distance < 2000) {
+        } else if (distance < GOOD_KM) {
             title = '👍 Good Job!';
             message = 'Not bad! You got the right region!';
         } else {
@@ -740,8 +755,8 @@ function App() {
         shadowSize: [41, 41]
     });
 
-    const lineColor = resultData && resultData.distance < 500 ? 'green' : 
-                      resultData && resultData.distance < 2000 ? 'orange' : 'red';
+    const lineColor = resultData && resultData.distance < EXCELLENT_KM ? 'green' :
+                      resultData && resultData.distance < GOOD_KM ? 'orange' : 'red';
 
     return (
         <div className="game-container">
